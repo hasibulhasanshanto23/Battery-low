@@ -1,13 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Grid, TextField } from "@mui/material";
 import { ErrorMessage, Form, Formik } from "formik";
 import { StepOneForm } from "../StepOne";
 import { StepTwoValidationSchema } from "@/misc/stepTwoValidationSchema";
 import * as Styles from "./index.styles";
+import { useRouter } from "next/navigation";
 import { CSV } from "../CSV";
 
 export const StepTwoForm = ({ data, next, prev }) => {
+  const router = useRouter();
   const handleSubmit = (values) => {
     next(values);
   };
@@ -30,7 +32,7 @@ export const StepTwoForm = ({ data, next, prev }) => {
               <Grid item xs={12} sm={12} md={12}>
                 <Styles.Upload>
                   <Styles.Label>Upload your csv file</Styles.Label>
-                   <CSV/>
+                  <CSV />
                 </Styles.Upload>
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
@@ -39,7 +41,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
                   label="max_X"
                   fullWidth
                   type="text"
-                  value={props.values.max_X}
+                  value={
+                    props.values.max_X
+                      ? props.values.max_X
+                      : (props.values.max_X = data.max_X)
+                  }
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="max_X" />}
@@ -51,7 +57,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
                   name="min_X"
                   label="min_X"
                   fullWidth
-                  value={props.values.min_X}
+                  value={
+                    props.values.min_X
+                      ? props.values.min_X
+                      : (props.values.min_X = data.min_X)
+                  }
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="min_X" />}
@@ -63,7 +73,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
                   name="max_Y"
                   label="max_Y"
                   fullWidth
-                  value={props.values.max_Y}
+                  value={
+                    props.values.max_Y
+                      ? props.values.max_Y
+                      : (props.values.max_Y = data.max_Y)
+                  }
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="max_Y" />}
@@ -75,7 +89,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
                   name="min_Y"
                   label="min_Y"
                   fullWidth
-                  value={props.values.min_Y}
+                  value={
+                    props.values.min_Y
+                      ? props.values.min_Y
+                      : (props.values.min_Y = data.min_Y)
+                  }
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="min_Y" />}
@@ -87,7 +105,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
                   name="max_Z"
                   label="max_Z"
                   fullWidth
-                  value={props.values.max_Z}
+                  value={
+                    props.values.max_Z
+                      ? props.values.max_Z
+                      : (props.values.max_Z = data.max_Z)
+                  }
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="max_Z" />}
@@ -100,7 +122,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
                   name="min_Z"
                   label="min_Z"
                   fullWidth
-                  value={props.values.min_Z}
+                  value={
+                    props.values.min_Z
+                      ? props.values.min_Z
+                      : (props.values.min_Z = data.min_Z)
+                  }
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   helperText={<ErrorMessage name="min_Z" />}
@@ -117,7 +143,11 @@ export const StepTwoForm = ({ data, next, prev }) => {
               >
                 Back
               </Button>
-              <Button type="submit" variant="outlined">
+              <Button
+                type="submit"
+                variant="outlined"
+                onClick={() => router.push("/result")}
+              >
                 Submit
               </Button>
             </Styles.ButtonDiv>

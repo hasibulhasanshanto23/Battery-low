@@ -1,10 +1,10 @@
 'use client'
 import * as Styles from './index.styles'
 
-export const Header = () => {
+export const Header = ({title}) => {
   return (
     <Styles.Wrapper>
-        <Styles.FormTitle>XYZ Engine</Styles.FormTitle>
+        <Styles.FormTitle>{title}</Styles.FormTitle>
     </Styles.Wrapper>
   )
 }
