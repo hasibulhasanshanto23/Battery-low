@@ -1,12 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, Grid, TextField } from "@mui/material";
 import { ErrorMessage, Form, Formik } from "formik";
 import { StepOneForm } from "../StepOne";
 import { StepTwoValidationSchema } from "@/misc/stepTwoValidationSchema";
 import * as Styles from "./index.styles";
 import { useRouter } from "next/navigation";
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from "recharts";
 import { CSV } from "../CSV";
+import { ContextApi } from "@/app/layout";
 
 export const StepTwoForm = ({ data, next, prev }) => {
   const router = useRouter();
@@ -14,9 +16,23 @@ export const StepTwoForm = ({ data, next, prev }) => {
     next(values);
   };
 
+  const { parsedData, setParsedData } = useContext(ContextApi);
+  console.log('PARSED',parsedData)
+
   return (
     <>
       <StepOneForm data={data} isDisabled={true} />
+      {parsedData.length > 0 && (
+      <Styles.ChartDiv>
+          <ResponsiveContainer width={'100%'} height={200}>
+          <BarChart  data={parsedData}>
+            <XAxis dataKey="KP" />
+            <YAxis dataKey="X" />
+            <Bar dataKey="X" />
+          </BarChart>
+        </ResponsiveContainer>
+      </Styles.ChartDiv>
+      )}
       <Formik
         initialValues={data}
         onSubmit={handleSubmit}

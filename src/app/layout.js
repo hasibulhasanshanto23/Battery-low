@@ -14,6 +14,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+   // State to store parsed data
+   const [parsedData, setParsedData] = useState([]);
+
     //company data STATE
     const [companyData, setCompanyData] = useState({
       projectName: "",
@@ -32,7 +35,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ContextApi.Provider value={{companyData,setCompanyData}}>
+        <ContextApi.Provider value={{companyData,setCompanyData,parsedData,setParsedData}}>
         {children}
         </ContextApi.Provider>
       </body>

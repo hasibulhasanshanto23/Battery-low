@@ -21,3 +21,9 @@ export const Upload=styled('div')(({theme})=>({
      color:'#117FDF',
      marginBottom:'4px'
   }))
+
+  export const ChartDiv=styled('div')(({theme})=>({
+ padding:'16px 0px 4px 0px'
+ }))
+
+  
